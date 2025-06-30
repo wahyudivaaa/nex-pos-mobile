@@ -1,411 +1,256 @@
-# NexPOS Mobile - Point of Sale System
+# NexPOS Mobile - Aplikasi POS Mobile Modern
 
-Aplikasi Point of Sale mobile yang komprehensif menggunakan React Native Expo dan Firebase sebagai backend database.
+🚀 **Aplikasi Point of Sale (POS) mobile berbasis React Native dan Expo dengan TypeScript**
 
-## 🚀 Fitur Utama
+![Platform](https://img.shields.io/badge/Platform-iOS%20%7C%20Android%20%7C%20Web-blue)
+![Framework](https://img.shields.io/badge/Framework-React%20Native%20%7C%20Expo-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue)
+![Firebase](https://img.shields.io/badge/Backend-Firebase-orange)
 
-### 🔐 **Sistem Autentikasi**
+## ✨ Fitur Utama
 
-- Login dengan email/password menggunakan Firebase Auth
-- Role-based access control (Admin & Kasir)
-- Persistent login dengan AsyncStorage
-- Forgot password functionality
+### 📱 Multi-Platform Support
 
-### 📊 **Dashboard Dinamis**
+- **iOS & Android**: Native mobile experience
+- **Web**: Responsive web application
+- **Progressive Web App (PWA)**: Installable web app
 
-- Metrik real-time: Total pendapatan, jumlah transaksi, total produk
-- Peringatan stok menipis
-- Grafik pendapatan 7 hari terakhir
-- Quick actions untuk transaksi baru
+### 🔐 Sistem Autentikasi
 
-### 🛍️ **Manajemen Produk**
+- Login & Register dengan Firebase Auth
+- Role-based access (Admin & Kasir)
+- Secure session management
+- Password reset functionality
 
-- CRUD operations untuk produk dan kategori
-- Upload gambar produk
-- Manajemen stok dengan alert minimum
-- Pencarian dan filter produk
+### 📊 Dashboard Analytics
 
-### 💰 **Sistem Transaksi**
+- Real-time sales metrics
+- Revenue tracking dengan growth indicators
+- Recent transactions feed
+- Top products ranking
+- Interactive charts dan statistics
 
-- Interface POS mobile-friendly
-- Shopping cart dengan real-time calculation
-- Multiple payment methods (Cash, Card, QRIS)
-- Auto-generate transaction numbers
-- Receipt generation dan sharing
+### 🛍️ Manajemen Produk
 
-### 📈 **Laporan & Analytics**
+- **CRUD Operations**: Create, Read, Update, Delete products
+- **Image Management**: Upload product images
+- **Barcode Support**: Product barcode scanning
+- **Category Management**: Organize products by categories
+- **Stock Management**: Track inventory levels
+- **Bulk Operations**: Select dan manage multiple products
+- **Advanced Filtering**: Search by name, category, stock status
 
-- Laporan penjualan dengan filter periode
-- Laporan inventaris dan stok
-- Laporan keuangan dengan profit margin
-- Export ke PDF dan Excel
+### 💰 Sistem Transaksi
 
-### 🎨 **Design System**
+- **POS Interface**: User-friendly cashier interface
+- **Multiple Payment Methods**: Cash, Card, Digital wallet
+- **Receipt Generation**: PDF receipts dengan QR codes
+- **Transaction History**: Complete transaction tracking
+- **Real-time Updates**: Live transaction monitoring
 
-- Dark navy theme sesuai dengan website
-- Responsive design untuk semua device
-- Modern UI components dengan gradients
-- Smooth animations dan transitions
+### 📈 Reporting & Analytics
 
-## 🛠️ Teknologi Stack
+- **Sales Reports**: Daily, weekly, monthly reports
+- **Financial Reports**: Revenue dan profit analysis
+- **Inventory Reports**: Stock levels dan movements
+- **Export Functions**: PDF dan Excel exports
+- **Visual Charts**: Interactive data visualization
 
-### Frontend
+### ⚙️ Pengaturan & Konfigurasi
 
-- **React Native** - Framework mobile cross-platform
-- **Expo** - Development platform dan toolchain
-- **React Navigation** - Navigasi antar screen
-- **Expo Linear Gradient** - Gradient backgrounds
-- **React Native Chart Kit** - Data visualization
-- **React Native Vector Icons** - Icon set
+- **User Management**: Admin dapat manage users
+- **App Settings**: Dark mode, notifications, preferences
+- **Backup & Restore**: Data backup functionality
+- **Multi-language Support**: Indonesian dan English
 
-### Backend & Database
-
-- **Firebase Auth** - Authentication service
-- **Firestore** - NoSQL database real-time
-- **Firebase Storage** - File storage untuk gambar
-
-### Libraries Utama
-
-- **@react-native-async-storage/async-storage** - Local storage
-- **expo-print** - PDF generation
-- **expo-sharing** - File sharing
-- **expo-image-picker** - Image upload
-- **react-native-modal** - Modal dialogs
-
-## 🏗️ Struktur Project
-
-```
-POS-Cashier-Mobile/
-├── config/
-│   └── firebase.js          # Konfigurasi Firebase
-├── context/
-│   ├── AuthContext.js       # Context untuk authentication
-│   └── DataContext.js       # Context untuk data management
-├── constants/
-│   └── Colors.js            # Tema warna dark navy
-├── components/
-│   └── ui/
-│       ├── Button.js        # Komponen button reusable
-│       └── Input.js         # Komponen input reusable
-├── screens/
-│   ├── LoginScreen.js       # Screen login
-│   ├── DashboardScreen.js   # Dashboard utama
-│   ├── ProductsScreen.js    # Manajemen produk
-│   ├── TransactionsScreen.js # Daftar transaksi
-│   ├── NewTransactionScreen.js # Form transaksi baru
-│   ├── ReportsScreen.js     # Laporan dan analytics
-│   ├── ProfileScreen.js     # Profil pengguna
-│   └── SettingsScreen.js    # Pengaturan aplikasi
-├── navigation/
-│   └── AppNavigator.js      # Setup navigasi utama
-├── App.js                   # Entry point aplikasi
-└── package.json            # Dependencies dan scripts
-```
-
-## 🔧 Setup & Installation
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Node.js (v14 atau lebih baru)
+- Node.js (v18 atau lebih baru)
 - npm atau yarn
-- Expo CLI: `npm install -g @expo/cli`
-- Android Studio (untuk Android development)
-- Xcode (untuk iOS development - hanya di macOS)
+- Expo CLI
+- Firebase account
 
-### 1. Clone & Install Dependencies
+### Installation
+
+1. **Clone repository**
 
 ```bash
-git clone <repository-url>
-cd POS-Cashier-Mobile
+git clone https://github.com/wahyudivaaa/nex-pos-mobile.git
+cd nex-pos-mobile
+```
+
+2. **Install dependencies**
+
+```bash
 npm install
 ```
 
-### 2. Setup Firebase
+3. **Setup Firebase**
 
-1. Buat project baru di [Firebase Console](https://console.firebase.google.com)
-2. Enable Authentication dengan Email/Password
-3. Setup Firestore Database
-4. Generate configuration dan update `config/firebase.js`:
+```bash
+# Copy template konfigurasi Firebase
+cp config/firebase.example.ts config/firebase.ts
+```
 
-```javascript
-const firebaseConfig = {
+Edit `config/firebase.ts` dengan kredensial Firebase Anda:
+
+```typescript
+export const firebaseConfig = {
   apiKey: "your-api-key",
   authDomain: "your-project.firebaseapp.com",
   projectId: "your-project-id",
-  storageBucket: "your-project.appspot.com",
-  messagingSenderId: "your-sender-id",
-  appId: "your-app-id",
+  // ... other config
 };
 ```
 
-### 3. Setup Firestore Collections
-
-Buat collections berikut di Firestore:
-
-#### `users`
-
-```javascript
-{
-  email: "admin@nexpos.com",
-  name: "Administrator",
-  role: "admin", // atau "kasir"
-  createdAt: timestamp,
-  lastLogin: timestamp
-}
-```
-
-#### `categories`
-
-```javascript
-{
-  name: "Makanan",
-  description: "Kategori makanan",
-  createdAt: timestamp,
-  updatedAt: timestamp
-}
-```
-
-#### `products`
-
-```javascript
-{
-  name: "Nasi Goreng",
-  description: "Nasi goreng spesial",
-  price: 25000,
-  stock: 100,
-  alertStock: 10,
-  categoryId: "category-id",
-  imageUrl: "https://...",
-  createdAt: timestamp,
-  updatedAt: timestamp
-}
-```
-
-#### `transactions`
-
-```javascript
-{
-  transactionNumber: "TRX-1672531200000",
-  userId: "user-id",
-  totalAmount: 75000,
-  paymentMethod: "cash", // cash, card, qris
-  status: "completed",
-  createdAt: timestamp,
-  updatedAt: timestamp
-}
-```
-
-#### `transactionDetails`
-
-```javascript
-{
-  transactionId: "transaction-id",
-  productId: "product-id",
-  productName: "Nasi Goreng",
-  quantity: 3,
-  unitPrice: 25000,
-  subtotal: 75000,
-  createdAt: timestamp
-}
-```
-
-### 4. Jalankan Aplikasi
+4. **Start development server**
 
 ```bash
-# Development mode
+# Mobile development
 npm start
+
+# Web development
+npm run web
 
 # Android
 npm run android
 
 # iOS (macOS only)
 npm run ios
-
-# Web
-npm run web
 ```
 
-## 📱 User Guide
+## 🌐 Deployment
 
-### Login
+### Deploy ke Vercel (Web)
 
-- **Admin**: Full access ke semua fitur
-- **Kasir**: Akses terbatas pada transaksi dan view data
-
-### Dashboard
-
-- Lihat metrik utama dalam kartu berwarna
-- Quick action untuk transaksi baru
-- Grafik pendapatan real-time
-
-### Transaksi Baru
-
-1. Pilih produk dari grid atau gunakan search
-2. Atur quantity untuk setiap item
-3. Pilih metode pembayaran
-4. Konfirmasi dan selesaikan transaksi
-5. Generate receipt dan share
-
-### Manajemen Produk (Admin Only)
-
-- Tambah produk baru dengan foto
-- Update stok dan harga
-- Set alert minimum stock
-- Kategorisasi produk
-
-### Laporan (Admin Only)
-
-- Filter berdasarkan periode
-- Export ke PDF atau Excel
-- Analisis penjualan dan profit
-
-## 🎨 Design System
-
-### Color Palette
-
-```javascript
-// Primary Colors
-primary: '#1e3a8a',      // Navy blue
-primaryDark: '#1e293b',   // Darker navy
-primaryLight: '#3b82f6', // Lighter blue
-
-// Status Colors
-success: '#10b981',       // Green
-warning: '#f59e0b',       // Yellow
-error: '#ef4444',         // Red
-accent: '#06b6d4',        // Cyan
-```
-
-### Typography
-
-- **Headers**: Bold, 24px-32px
-- **Body**: Regular, 16px
-- **Captions**: 12px-14px
-- **Font**: System default (San Francisco/Roboto)
-
-### Components
-
-- **Buttons**: Rounded corners, gradient backgrounds
-- **Cards**: Subtle shadows, rounded corners
-- **Inputs**: Focus states, validation feedback
-- **Icons**: Ionicons, consistent sizing
-
-## 🔒 Security Features
-
-- **Authentication**: Firebase Auth dengan email verification
-- **Data Validation**: Input sanitization dan validation
-- **Role-based Access**: Middleware protection per screen
-- **Secure Storage**: Encrypted local storage untuk tokens
-- **API Security**: Firestore rules untuk data protection
-
-## 📊 Performance
-
-- **Real-time Updates**: Firestore listeners untuk data sync
-- **Optimized Rendering**: React.memo dan lazy loading
-- **Image Optimization**: Expo Image dengan caching
-- **Bundle Size**: Code splitting dan tree shaking
-
-## 🚀 Deployment
-
-### Android (Google Play Store)
+1. **Install Vercel CLI**
 
 ```bash
+npm i -g vercel
+```
+
+2. **Deploy**
+
+```bash
+vercel --prod
+```
+
+Atau connect repository GitHub ke Vercel dashboard untuk auto-deployment.
+
+### Build untuk Production
+
+```bash
+# Web build
+npm run build:web
+
+# Android APK
 expo build:android
-```
 
-### iOS (App Store)
-
-```bash
+# iOS App Store
 expo build:ios
 ```
 
-### Over-the-Air Updates
-
-```bash
-expo publish
-```
-
-## 🔄 Data Flow
+## 📁 Struktur Project
 
 ```
-User Action → Component → Context → Firebase → Real-time Update → UI
+pos-cashier-mobile/
+├── app/                    # Expo Router pages
+├── components/             # Reusable components
+│   └── ui/                # UI components
+├── screens/               # Screen components
+├── navigation/            # Navigation setup
+├── context/               # React Context providers
+├── types/                 # TypeScript type definitions
+├── config/                # Configuration files
+├── assets/                # Images, fonts, etc.
+└── constants/             # App constants
 ```
 
-1. User melakukan action (login, tambah produk, etc.)
-2. Component memanggil function dari Context
-3. Context melakukan operasi ke Firebase
-4. Firebase mengirim real-time update
-5. Context update state
-6. UI re-render dengan data terbaru
+## 🔧 Teknologi yang Digunakan
 
-## 🧪 Testing
+### Frontend
 
-```bash
-# Unit tests
-npm test
+- **React Native**: Framework mobile
+- **Expo**: Development platform
+- **TypeScript**: Type safety
+- **React Navigation**: Navigation library
+- **React Native Elements**: UI components
+- **React Native Paper**: Material Design components
 
-# E2E testing
-expo install detox
-```
+### Backend & Services
 
-## 📦 Build & Release
+- **Firebase Auth**: Authentication
+- **Firestore**: Database
+- **Firebase Storage**: File storage
+- **Firebase Analytics**: App analytics
 
-### Production Build
+### Development Tools
 
-```bash
-# Android APK
-eas build -p android
+- **ESLint**: Code linting
+- **Prettier**: Code formatting
+- **Metro**: JavaScript bundler
+- **Vercel**: Web deployment
 
-# iOS IPA
-eas build -p ios
-```
+## 📱 Screenshots
 
-### App Store Submission
+### Mobile Interface
 
-1. Update version di `app.json`
-2. Build production version
-3. Upload ke respective stores
-4. Submit untuk review
+- Dashboard dengan analytics real-time
+- Product management dengan image upload
+- Transaction processing interface
+- Reports dan charts
+
+### Web Interface
+
+- Responsive design untuk desktop
+- Touch-friendly untuk tablet
+- PWA support untuk mobile web
+
+## 🔒 Keamanan
+
+- Secure Firebase authentication
+- Role-based access control
+- Input validation dan sanitization
+- Secure data transmission dengan HTTPS
+- Local data encryption
+
+## 📊 Performance
+
+- Optimized untuk performa mobile
+- Lazy loading untuk components
+- Image optimization
+- Efficient state management
+- Minimal bundle size
 
 ## 🤝 Contributing
 
 1. Fork repository
 2. Create feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit changes (`git commit -m 'Add AmazingFeature'`)
-4. Push branch (`git push origin feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
 5. Open Pull Request
 
 ## 📄 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 📞 Support
 
-- **Developer**: [Your Name]
-- **Email**: [your.email@domain.com]
-- **GitHub**: [github.com/yourusername]
+- 📧 Email: support@nexpos.com
+- 📱 WhatsApp: +62 xxx xxxx xxxx
+- 🌐 Website: https://nexpos-mobile.vercel.app
 
-## 🔮 Roadmap
+## 🙏 Acknowledgments
 
-### Version 2.0
-
-- [ ] Barcode scanner integration
-- [ ] Offline mode dengan sync
-- [ ] Multi-language support
-- [ ] Advanced analytics dashboard
-- [ ] Customer management
-- [ ] Loyalty program
-- [ ] Integration dengan hardware printer
-- [ ] Multi-store support
-
-### Version 1.1
-
-- [ ] Push notifications
-- [ ] Dark/Light theme toggle
-- [ ] Backup/restore data
-- [ ] Advanced search filters
-- [ ] Batch operations
+- React Native team untuk framework yang amazing
+- Expo team untuk development tools
+- Firebase team untuk backend services
+- Open source community untuk semua dependencies
 
 ---
 
-© 2024 NexPOS Mobile. All rights reserved.
+**Dibuat dengan ❤️ oleh Tim NexPOS**
+
+⭐ **Star repository ini jika bermanfaat!**
