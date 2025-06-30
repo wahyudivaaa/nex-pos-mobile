@@ -23,4 +23,18 @@ export const Colors = {
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
   },
+  // Extended colors for POS app
+  primary: '#1E40AF',
+  secondary: '#64748B',
+  accent: '#3B82F6',
+  success: '#10B981',
+  warning: '#F59E0B',
+  error: '#EF4444',
+  surface: '#F8FAFC',
+  card: '#FFFFFF',
+  border: '#E2E8F0',
+  white: '#FFFFFF',
+  black: '#000000',
+  textSecondary: '#64748B',
+  textMuted: '#94A3B8',
 };
