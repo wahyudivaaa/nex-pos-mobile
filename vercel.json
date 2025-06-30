@@ -11,6 +11,6 @@
         "dest": "/index.html"
     }],
     "buildCommand": "npm run build:web",
-    "devCommand": "npm run web",
+    "outputDirectory": "dist",
     "installCommand": "npm install"
 }
