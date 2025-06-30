@@ -1,8 +1,8 @@
-import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
 
 import { useAuth } from '../context/AuthContext';
 
@@ -33,16 +33,16 @@ const Colors = {
 
 // Import screens that exist
 import DashboardScreen from '../screens/DashboardScreen';
-import TransactionsScreen from '../screens/TransactionsScreen';
 import LoginScreen from '../screens/LoginScreen';
-import RegisterScreen from '../screens/RegisterScreen';
-import ProductsScreen from '../screens/ProductsScreen';
 import NewTransactionScreen from '../screens/NewTransactionScreen';
+import ProductsScreen from '../screens/ProductsScreen';
+import RegisterScreen from '../screens/RegisterScreen';
 import ReportsScreen from '../screens/ReportsScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import TransactionsScreen from '../screens/TransactionsScreen';
 
 // Simple placeholder screens for missing components
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 const PlaceholderScreen: React.FC<{ title: string }> = ({ title }) => (
   <View style={placeholderStyles.container}>
@@ -197,7 +197,7 @@ const AppNavigator: React.FC = () => {
   const { user, loading } = useAuth();
 
   if (loading) {
-    return null;
+    return <LoadingScreen message="Memuat sistem autentikasi..." />;
   }
 
   return (

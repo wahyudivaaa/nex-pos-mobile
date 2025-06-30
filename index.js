@@ -1,4 +1,5 @@
 import { registerRootComponent } from 'expo';
-import RootLayout from './app/_layout';
+import App from './App';
 
-registerRootComponent(RootLayout);
+// Register the main App component instead of the duplicated layout
+registerRootComponent(App);

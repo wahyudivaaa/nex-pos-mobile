@@ -1,12 +1,12 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import {
-    signInWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged,
     createUserWithEmailAndPassword,
     User as FirebaseUser,
+    onAuthStateChanged,
+    signInWithEmailAndPassword,
+    signOut,
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
+import React, { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { auth, db } from '../config/firebase';
 import { AuthContextType, User } from '../types';
 
@@ -58,6 +58,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
         try {
             setLoading(true);
+            
+            // Check if Firebase is properly initialized
+            if (!isFirebaseInitialized()) {
+                return { 
+                    success: false, 
+                    error: 'Sistem autentikasi tidak tersedia. Periksa koneksi internet Anda.' 
+                };
+            }
+            
             const userCredential = await signInWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
             
@@ -65,25 +74,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             
             return { success: true };
         } catch (error: any) {
-            let errorMessage = 'Terjadi kesalahan saat login';
-            
-            switch (error.code) {
-                case 'auth/user-not-found':
-                    errorMessage = 'Email tidak terdaftar';
-                    break;
-                case 'auth/wrong-password':
-                    errorMessage = 'Password salah';
-                    break;
-                case 'auth/invalid-email':
-                    errorMessage = 'Format email tidak valid';
-                    break;
-                case 'auth/too-many-requests':
-                    errorMessage = 'Terlalu banyak percobaan login. Coba lagi nanti';
-                    break;
-                default:
-                    errorMessage = error.message || 'Terjadi kesalahan saat login';
-            }
-            
+            const errorMessage = getFirebaseErrorMessage(error.code) || error.message || 'Terjadi kesalahan saat login';
             return { success: false, error: errorMessage };
         } finally {
             setLoading(false);
