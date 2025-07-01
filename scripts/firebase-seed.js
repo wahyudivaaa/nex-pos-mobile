@@ -4,6 +4,7 @@
  */
 
 const admin = require('firebase-admin');
+require('dotenv').config(); // Load environment variables
 
 // Initialize Firebase Admin (gunakan service account key)
 // Download service account key dari Firebase Console → Project Settings → Service Accounts
@@ -11,7 +12,7 @@ const serviceAccount = require('./nexpos-firebase-adminsdk.json'); // Ganti deng
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: "https://your-project-id-default-rtdb.firebaseio.com/" // Ganti dengan project ID Anda
+    databaseURL: process.env.FIREBASE_DATABASE_URL || "https://your-project-id-default-rtdb.firebaseio.com/" // Ganti dengan project ID Anda
 });
 
 const db = admin.firestore();
@@ -169,27 +170,36 @@ async function seedProducts() {
 async function createAdminUser() {
     console.log('👤 Creating admin user...');
 
+    // Get admin credentials from environment variables
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@nexpos.com';
+    const adminPassword = process.env.ADMIN_PASSWORD || 'admin123456';
+    const adminName = process.env.ADMIN_NAME || 'Admin NexPOS';
+
+    if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+        console.log('⚠️  Warning: Using default admin credentials. Set ADMIN_EMAIL and ADMIN_PASSWORD environment variables for production.');
+    }
+
     try {
         // Buat user di Firebase Auth
         const user = await admin.auth().createUser({
-            email: 'admin@nexpos.com',
-            password: 'admin123456',
-            displayName: 'Admin NexPOS',
+            email: adminEmail,
+            password: adminPassword,
+            displayName: adminName,
             emailVerified: true
         });
 
         // Buat profile di Firestore
         await db.collection('users').doc(user.uid).set({
             uid: user.uid,
-            email: 'admin@nexpos.com',
-            name: 'Admin NexPOS',
+            email: adminEmail,
+            name: adminName,
             role: 'admin',
             createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
 
         console.log('✅ Admin user created:');
-        console.log('   Email: admin@nexpos.com');
-        console.log('   Password: admin123456');
+        console.log(`   Email: ${adminEmail}`);
+        console.log(`   Password: ${adminPassword}`);
 
     } catch (error) {
         if (error.code === 'auth/email-already-exists') {
@@ -215,10 +225,16 @@ async function seedAll() {
 
         console.log('🎉 Seeding completed successfully!');
         console.log('\n📱 You can now:');
-        console.log('   1. Login with admin@nexpos.com / admin123456');
+        console.log(`   1. Login with ${process.env.ADMIN_EMAIL || 'admin@nexpos.com'} / ${process.env.ADMIN_PASSWORD || 'admin123456'}`);
         console.log('   2. Create additional users');
         console.log('   3. Add more products');
         console.log('   4. Start making transactions');
+
+        if (!process.env.ADMIN_EMAIL || !process.env.ADMIN_PASSWORD) {
+            console.log('\n🔒 Security Note:');
+            console.log('   - Change the default admin password after first login');
+            console.log('   - Set ADMIN_EMAIL and ADMIN_PASSWORD environment variables for production');
+        }
 
     } catch (error) {
         console.error('❌ Seeding failed:', error);
