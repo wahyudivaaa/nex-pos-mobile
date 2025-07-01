@@ -9,6 +9,11 @@
         "ios": "expo start --ios",
         "web": "expo start --web",
         "build:web": "expo export --platform web",
+        "build": "npm run build:web",
+        "firebase:build": "npm run build:web",
+        "firebase:deploy": "firebase deploy --only hosting",
+        "firebase:build-deploy": "npm run build:web && firebase deploy --only hosting",
+        "firebase:verify": "node verify-deploy.js",
         "vercel-build": "npm run build:web",
         "clean": "rm -rf dist .expo node_modules/.cache",
         "lint": "expo lint"
@@ -58,6 +63,7 @@
         "@types/react": "~19.0.10",
         "eslint": "^9.25.0",
         "eslint-config-expo": "~9.2.0",
+        "firebase-tools": "^13.0.0",
         "typescript": "~5.8.3"
     },
     "private": true
