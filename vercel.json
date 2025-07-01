@@ -1,22 +1,22 @@
 {
     "buildCommand": "expo export --platform web",
     "outputDirectory": "dist",
-    "routes": [
+    "rewrites": [
         {
-            "src": "/_expo/(.*)",
-            "dest": "/_expo/$1"
+            "source": "/_expo/(.*)",
+            "destination": "/_expo/$1"
         },
         {
-            "src": "/assets/(.*)",
-            "dest": "/assets/$1"
+            "source": "/assets/(.*)",
+            "destination": "/assets/$1"
         },
         {
-            "src": "/favicon.ico",
-            "dest": "/favicon.ico"
+            "source": "/favicon.ico",
+            "destination": "/favicon.ico"
         },
         {
-            "src": "/(.*)",
-            "dest": "/index.html"
+            "source": "/(.*)",
+            "destination": "/index.html"
         }
     ],
     "headers": [
