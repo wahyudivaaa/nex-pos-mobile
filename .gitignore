@@ -45,9 +45,6 @@ app-example
 # Vercel
 .vercel
 
-# Firebase
-config/firebase.ts
-
 # VS Code
 .vscode/
 

@@ -4,17 +4,51 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import { Platform } from 'react-native';
 
-// Konfigurasi Firebase
-// Ganti dengan konfigurasi Firebase project Anda
+// Firebase Configuration
+// All values must be provided via environment variables
 const firebaseConfig = {
-    apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY || "AIzaSyBtsqv3dRAHWIHWAI7tfLDs8d6Q53VmKH0",
-    authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN || "nex-pos-mobile.firebaseapp.com",
-    projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID || "nex-pos-mobile",
-    storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET || "nex-pos-mobile.firebasestorage.app",
-    messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "211854345507",
-    appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID || "1:211854345507:web:a0e471c3055f1c48e5f896",
-    measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID || "G-HX2T9LN4ET"
+    apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+    measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
+
+// Validate that all required environment variables are set
+const requiredEnvVars = [
+    'EXPO_PUBLIC_FIREBASE_API_KEY',
+    'EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN',
+    'EXPO_PUBLIC_FIREBASE_PROJECT_ID',
+    'EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET',
+    'EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID',
+    'EXPO_PUBLIC_FIREBASE_APP_ID'
+];
+
+const missingEnvVars = requiredEnvVars.filter(envVar => !process.env[envVar]);
+
+if (missingEnvVars.length > 0) {
+    const errorMessage = `❌ Firebase Configuration Error: Missing required environment variables:\n${missingEnvVars.map(env => `   - ${env}`).join('\n')}\n\nPlease create a .env file or set these environment variables.`;
+    
+    console.error(errorMessage);
+    
+    if (__DEV__) {
+        console.log('\n📋 How to fix this:');
+        console.log('1. Create a .env file in your project root');
+        console.log('2. Add your Firebase configuration values');
+        console.log('3. Restart your development server');
+        console.log('\nExample .env file:');
+        console.log('EXPO_PUBLIC_FIREBASE_API_KEY=your_api_key_here');
+        console.log('EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com');
+        console.log('EXPO_PUBLIC_FIREBASE_PROJECT_ID=your_project_id');
+        console.log('EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app');
+        console.log('EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id');
+        console.log('EXPO_PUBLIC_FIREBASE_APP_ID=your_app_id');
+    }
+    
+    throw new Error('Firebase configuration incomplete. Check environment variables.');
+}
 
 // Check if Firebase config is properly set
 const isProductionConfig = 
@@ -24,13 +58,6 @@ const isProductionConfig =
 
 if (!isProductionConfig && __DEV__) {
     console.warn('⚠️ Firebase Config Warning: Using demo configuration. Please set proper environment variables for production.');
-    console.log('📋 Required environment variables:');
-    console.log('   - EXPO_PUBLIC_FIREBASE_API_KEY');
-    console.log('   - EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN');
-    console.log('   - EXPO_PUBLIC_FIREBASE_PROJECT_ID');
-    console.log('   - EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET');
-    console.log('   - EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID');
-    console.log('   - EXPO_PUBLIC_FIREBASE_APP_ID');
 }
 
 // Initialize Firebase
