@@ -70,3 +70,12 @@ Thumbs.db
 .Spotlight-V100
 .Trashes
 ehthumbs.db
+
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Deployment
+deploy.log

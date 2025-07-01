@@ -21,7 +21,17 @@
     "web": {
       "bundler": "metro",
       "output": "single",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "POS Cashier",
+      "shortName": "POS Cashier",
+      "lang": "id",
+      "scope": "/",
+      "themeColor": "#0f172a",
+      "backgroundColor": "#ffffff",
+      "display": "standalone",
+      "orientation": "portrait",
+      "startUrl": "/",
+      "preferRelatedApplications": false
     },
     "plugins": [
       [
